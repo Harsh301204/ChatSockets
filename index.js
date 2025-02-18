@@ -12,14 +12,13 @@ app.use('/', express.static(__dirname + '/public'));                   // Will h
 io.on('connection', (socket) => {
     console.log('a user connected' , socket.id);
 
-    socket.on('On Client' , ()=> {
-        console.log("Request Recieved from Frontend")
+    socket.on('msg_send' , (data) => {
+        console.log(data)
+        // io.emit('Messsage Recieved' , data)
+        // socket.emit('Messsage Recieved' , data)
+        socket.broadcast.emit('Messsage Recieved' , data)
     })
 
-
-    setInterval(() => {
-        socket.emit('From Server to Client')
-    } , 3000)
 });
 
 
